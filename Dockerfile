@@ -76,7 +76,7 @@ COPY config/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
 
 # copy local defualt config file for NGINX
-COPY config/nginx/nginx.conf /etc/nginx/sites-available/default
+COPY config/nginx/default /etc/nginx/sites-available/default
 
 # php7.0-fpm will not start if this directory does not exist
 RUN mkdir /run/php
