@@ -70,13 +70,13 @@ VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/v
 VOLUME ["/var/www"]
 
 # copy config file for Supervisor
-COPY deploy/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY config/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # backup default default config for NGINX
 RUN cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
 
 # copy local defualt config file for NGINX
-COPY deploy/nginx.conf /etc/nginx/sites-available/default
+COPY config/nginx/nginx.conf /etc/nginx/sites-available/default
 
 # php7.0-fpm will not start if this directory does not exist
 RUN mkdir /run/php
