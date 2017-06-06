@@ -1,18 +1,13 @@
-[![](https://badge.imagelayers.io/andreisusanu/nginx-php7:latest.svg)](https://imagelayers.io/?images=andreisusanu/nginx-php7:latest)
-
 nginx-php7
 ==========
 
 Docker image for NGINX and PHP7, started using Supervisor.
 
-Last stable NGINX installed from official stable repository (http://ppa.launchpad.net/nginx/stable/ubuntu)
-Last PHP7 installed from Ondřej Surý's unofficial repository (http://ppa.launchpad.net/ondrej/php/ubuntu)
-
 Build image
 -----------
 
 ```bash
-docker build -t andreisusanu/nginx-php7 .
+docker build -t huubvdw/nginx-php7 .
 ```
 
 
@@ -21,16 +16,16 @@ Run container
 ```bash
 docker run \
     --name nginx-php7 \
-    -p 8000:80 \
+    -p 80:80 \
     -v /path/to/local/www:/var/www/html \
-    andreisusanu/nginx-php7
+    huubvdw/nginx-php7
 ```
 
 
 Test container
 --------------
 ```bash
-http://localhost:8000/
+http://127.0.0.1/
 ```
 
 
