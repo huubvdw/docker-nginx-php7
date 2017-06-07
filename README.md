@@ -7,7 +7,7 @@ Build image
 -----------
 
 ```bash
-docker build -t huubvdw/nginx-php7 .
+docker build huubvdw/nginx-php7
 ```
 
 
@@ -17,7 +17,7 @@ Run container
 docker run \
     --name nginx-php7 \
     -p 80:80 \
-    -v /path/to/local/www:/var/www/html \
+    -v /path/to/laravel:/var/www \
     huubvdw/nginx-php7
 ```
 
