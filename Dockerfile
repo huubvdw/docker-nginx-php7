@@ -1,15 +1,9 @@
-#FROM ubuntu:trusty
 FROM phusion/baseimage:latest
 
 MAINTAINER Andrei Susanu <andrei.susanu@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-# add NGINX official stable repository
-#RUN echo "deb http://ppa.launchpad.net/nginx/stable/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/nginx.list
-
-# add PHP7 unofficial repository (https://launchpad.net/~ondrej/+archive/ubuntu/php)
-#RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/php.list
 # Add the "PHP 7" ppa
 RUN apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:ondrej/php
@@ -59,9 +53,6 @@ RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/7.0/fpm/php-fpm
 
 # clear apt cache and remove unnecessary packages
 RUN apt-get autoclean && apt-get -y autoremove
-
-# add a phpinfo script for INFO purposes
-#RUN echo "<?php phpinfo();" >> /var/www/html/index.php
 
 # NGINX mountable directories for config and logs
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx"]
