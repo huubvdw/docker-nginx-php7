@@ -13,27 +13,27 @@ RUN apt-get update && \
     apt-get -y --force-yes --no-install-recommends install \
     supervisor \
     nginx \
-    php7.0-fpm \
-    php7.0-cli \
-    php7.0-common \
-    php7.0-curl \
-    php7.0-gd \
-    php7.0-intl \
-    php7.0-json \
-    php7.0-mbstring \
-    php7.0-mcrypt \
-    php7.0-mysql \
-    php7.0-opcache \
-    php7.0-pgsql \
-    php7.0-soap \
-    php7.0-sqlite3 \
-    php7.0-xml \
-    php7.0-xmlrpc \
-    php7.0-xsl \
-    php7.0-zip \
-    php7.0-bcmath \
-    php7.0-memcached \
-    php7.0-dev \
+    php7.1-fpm \
+    php7.1-cli \
+    php7.1-common \
+    php7.1-curl \
+    php7.1-gd \
+    php7.1-intl \
+    php7.1-json \
+    php7.1-mbstring \
+    php7.1-mcrypt \
+    php7.1-mysql \
+    php7.1-opcache \
+    php7.1-pgsql \
+    php7.1-soap \
+    php7.1-sqlite3 \
+    php7.1-xml \
+    php7.1-xmlrpc \
+    php7.1-xsl \
+    php7.1-zip \
+    php7.1-bcmath \
+    php7.1-memcached \
+    php7.1-dev \
     pkg-config \
     libcurl4-openssl-dev \
     libedit-dev \
@@ -49,7 +49,7 @@ RUN apt-get update && \
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # configure php-fpm as non-daemon
-RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/7.0/fpm/php-fpm.conf
+RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/7.1/fpm/php-fpm.conf
 
 # clear apt cache and remove unnecessary packages
 RUN apt-get autoclean && apt-get -y autoremove
@@ -69,7 +69,7 @@ RUN cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
 # copy local defualt config file for NGINX
 COPY config/nginx/default /etc/nginx/sites-available/default
 
-# php7.0-fpm will not start if this directory does not exist
+# php7.1-fpm will not start if this directory does not exist
 RUN mkdir /run/php
 
 # NGINX ports
