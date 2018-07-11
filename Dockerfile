@@ -43,6 +43,7 @@ RUN apt-get update && \
     libsqlite3-dev \
     sqlite3 \
     git \
+    graphviz \
     curl
 
 # configure NGINX as non-daemon
