@@ -1,7 +1,21 @@
 server {
     listen 80;
 
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443;
+    ssl on;
+
+    access_log /dev/stdout;
+
     root /var/www/public;
+
+    ssl_certificate     /etc/nginx/certs/default.crt;
+    ssl_certificate_key /etc/nginx/certs/default.key;
+    ssl_ciphers         EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH;
+    ssl_protocols       TLSv1.1 TLSv1.2;
 
     index index.php index.html;
 
