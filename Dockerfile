@@ -3,6 +3,7 @@ FROM phusion/baseimage:latest
 MAINTAINER Andrei Susanu <andrei.susanu@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV DOCKERIZE_VERSION v0.6.1
 
 # Add the "PHP 7" ppa
 RUN apt-get install -y software-properties-common && \
@@ -43,7 +44,11 @@ RUN apt-get update && \
     sqlite3 \
     git \
     graphviz \
-    curl
+    curl \
+    wget
+
+# Install dockerize
+RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
 # configure NGINX as non-daemon
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
