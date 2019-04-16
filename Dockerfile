@@ -3,6 +3,7 @@ FROM phusion/baseimage:latest
 MAINTAINER Andrei Susanu <andrei.susanu@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV DOCKERIZE_VERSION v0.6.1
 
 # Add the "PHP 7" ppa
 RUN apt-get install -y software-properties-common && \
@@ -13,26 +14,26 @@ RUN apt-get update && \
     apt-get -y --force-yes --no-install-recommends install \
     supervisor \
     nginx \
-    php7.2-fpm \
-    php7.2-cli \
-    php7.2-common \
-    php7.2-curl \
-    php7.2-gd \
-    php7.2-intl \
-    php7.2-json \
-    php7.2-mbstring \
-    php7.2-mysql \
-    php7.2-opcache \
-    php7.2-pgsql \
-    php7.2-soap \
-    php7.2-sqlite3 \
-    php7.2-xml \
-    php7.2-xmlrpc \
-    php7.2-xsl \
-    php7.2-zip \
-    php7.2-bcmath \
-    php7.2-memcached \
-    php7.2-dev \
+    php7.3-fpm \
+    php7.3-cli \
+    php7.3-common \
+    php7.3-curl \
+    php7.3-gd \
+    php7.3-intl \
+    php7.3-json \
+    php7.3-mbstring \
+    php7.3-mysql \
+    php7.3-opcache \
+    php7.3-pgsql \
+    php7.3-soap \
+    php7.3-sqlite3 \
+    php7.3-xml \
+    php7.3-xmlrpc \
+    php7.3-xsl \
+    php7.3-zip \
+    php7.3-bcmath \
+    php7.3-memcached \
+    php7.3-dev \
     pkg-config \
     libcurl4-openssl-dev \
     libedit-dev \
@@ -43,13 +44,17 @@ RUN apt-get update && \
     sqlite3 \
     git \
     graphviz \
-    curl
+    curl \
+    wget
+
+# Install dockerize
+RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
 # configure NGINX as non-daemon
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # configure php-fpm as non-daemon
-RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/7.2/fpm/php-fpm.conf
+RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/7.3/fpm/php-fpm.conf
 
 # clear apt cache and remove unnecessary packages
 RUN apt-get autoclean && apt-get -y autoremove
